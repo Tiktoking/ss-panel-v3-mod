@@ -25,12 +25,20 @@
 					<div class="card">
 						<div class="card-main">
 							<div class="card-inner">
-								<p>{$config["appName"]} 的邀请码，没了的话就烧纸吧。</p>
+								<p>{$config["appName"]} 的邀请码，没了的话,请扫描下方二维码添加微信公众号<code><font size="2" color="red"> Real3w </font></code>获取。</p>
 							</div>
 						</div>
 					</div>
-				
-					
+
+				<div class="col-lg-4 col-md-4">
+					<div class="card">
+						<div class="card-main">
+							<div class="card-inner">
+								<img src="/theme/material/images/weixin.jpg" width="258" height="258" />
+							</div>
+						</div>
+					</div>
+				</div>
 					
 					
 					<div class="card">

@@ -28,7 +28,7 @@
 									<h4>注意!</h4>
 									<p>请勿在任何地方公开节点地址！</p>
 									<p>流量比例为0.5即使用1000MB按照500MB流量记录记录结算.</p>
-									<a href="javascript:void(0);" onClick="urlChange('guide',0,0,0)">如果您不知道如何查看节点的详细信息和二维码，请点我。</a>
+									<a>如果您不知道如何查看节点的详细信息和二维码，请添加微信公众号<code><font size="2" color="red"> Real3w </font></code>获取使用教程。</a>
 								</div>
 							</div>
 						</div>

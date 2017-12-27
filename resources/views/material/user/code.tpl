@@ -32,7 +32,7 @@
 										<p class="card-heading">充值码</p>
 										<p>当前余额：{$user->money} 元</p>
 										<div class="form-group form-group-label">
-											<label class="floating-label" for="code">充值码</label>
+											<label class="floating-label" for="code">充值码(请通过下列方式向我付款来获取)</label>
 											<input class="form-control" id="code" type="text">
 										</div>
 									</div>
@@ -40,11 +40,44 @@
 										<div class="card-action-btn pull-left">
 											<button class="btn btn-flat waves-attach" id="code-update" ><span class="icon">check</span>&nbsp;充值</button>
 										</div>
-									</div>
+									</div>	
+								</div>
+
+								
+
+
+							</div>
+						</div>
+					</div>
+						
+
+					
+					<div class="col-lg-4 col-md-4">
+						<div class="card margin-bottom-no">
+							<div class="card-main">
+								<div class="card-inner">
+									<p>扫码充值时备注上 <code>联系方式</code>，或者将转账截图发送到微信公众号<code><font size="2" color="red"> Real3w </font></code>，我会向您及时发送充值码</p>
+									
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<div class="col-lg-8 col-md-8">
+						<div class="card margin-bottom-no">
+							<div class="card-main">
+								<div class="card-inner">
+									
+									<p>请扫码，给我转账来获取<code> 充值码 </code> </p>
+									<img src="/theme/material/images/pay/alipay.jpg" width="250" height="291" />
+									<img src="/theme/material/images/pay/weipay.png" width="250" height="291" />
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
 					
 					{if $pmw!=''}
 					<div class="col-lg-12 col-md-12">

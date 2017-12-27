@@ -30,6 +30,7 @@ use App\Utils\Telegram;
 use CloudXNS\Api;
 use App\Models\Disconnect;
 use App\Models\UnblockIp;
+use App\Utils\ServerChan;
 
 class Job
 {
@@ -51,10 +52,10 @@ class Job
 
         $db_address_array = explode(':', Config::get('db_host'));
 
-        system('mysqldump --user='.Config::get('db_username').' --password='.Config::get('db_password').' --host='.$db_address_array[0].' '.(isset($db_address_array[1])?'-P '.$db_address_array[1]:'').' '.Config::get('db_database').' announcement auto blockip bought code coupon disconnect_ip link login_ip payback radius_ban shop speedtest ss_invite_code ss_node ss_password_reset ticket unblockip user user_token email_verify detect_list relay paylist> /tmp/ssmodbackup/mod.sql', $ret);
+        system('mysqldump --user='.Config::get('db_username').' --password='.addcslashes(Config::get('db_password'),'&').' --host='.$db_address_array[0].' '.(isset($db_address_array[1])?'-P '.$db_address_array[1]:'').' '.Config::get('db_database').' announcement auto blockip bought code coupon disconnect_ip link login_ip payback radius_ban shop speedtest ss_invite_code ss_node ss_password_reset ticket unblockip user user_token email_verify detect_list relay paylist> /tmp/ssmodbackup/mod.sql', $ret);
 
 
-        system('mysqldump --opt --user='.Config::get('db_username').' --password='.Config::get('db_password').' --host='.$db_address_array[0].' '.(isset($db_address_array[1])?'-P '.$db_address_array[1]:'').' -d '.Config::get('db_database').' alive_ip ss_node_info ss_node_online_log user_traffic_log detect_log telegram_session >> /tmp/ssmodbackup/mod.sql', $ret);
+        system('mysqldump --opt --user='.Config::get('db_username').' --password='.addcslashes(Config::get('db_password'),'&').' --host='.$db_address_array[0].' '.(isset($db_address_array[1])?'-P '.$db_address_array[1]:'').' -d '.Config::get('db_database').' alive_ip ss_node_info ss_node_online_log user_traffic_log detect_log telegram_session >> /tmp/ssmodbackup/mod.sql', $ret);
 
         if (Config::get('enable_radius')=='true') {
             $db_address_array = explode(':', Config::get('radius_db_host'));
@@ -84,7 +85,7 @@ class Job
 
         system("rm -rf /tmp/ssmodbackup", $ret);
         system("rm /tmp/ssmodbackup.zip", $ret);
-
+        ServerChan::Send("备份完毕了喵~今天又是安全祥和的一天呢。");
         Telegram::Send("备份完毕了喵~今天又是安全祥和的一天呢。");
     }
 
@@ -143,7 +144,7 @@ class Job
         Speedtest::where("datetime", "<", time()-86400*3)->delete();
         EmailVerify::where("expire_in", "<", time()-86400*3)->delete();
         Telegram::Send("姐姐姐姐，数据库被清理了，感觉身体被掏空了呢~");
-
+        ServerChan::Send("数据库清理完毕，感觉身体被掏空~");
         //auto reset
         $boughts=Bought::all();
         foreach ($boughts as $bought) {
@@ -534,7 +535,7 @@ class Job
                             $notice_text = "喵喵喵~ ".$node->name." 节点掉线了喵~";
                         }
                     }
-
+                    ServerChan::Send($notice_text);
                     Telegram::Send($notice_text);
 
                     $myfile = fopen(BASE_PATH."/storage/".$node->id.".offline", "w+") or die("Unable to open file!");
@@ -595,6 +596,7 @@ class Job
                     }
 
                     Telegram::Send($notice_text);
+                    ServerChan::Send($notice_text);
 
                     unlink(BASE_PATH."/storage/".$node->id.".offline");
                 }
